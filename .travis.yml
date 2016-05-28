@@ -1,8 +1,14 @@
-language: csharp
-solution: LearningTravisCi.sln
+language: c
 
-install:
-  - sudo apt-get install mono-devel mono-gmcs nunit-console
+before_install:
+  - sudo apt-get update -qq > /dev/null
+  - sudo apt-get install -qq mono-devel mono-gmcs > /dev/null
+  - mozroots --import --sync
+  - mv -f src/.nuget/NuGet.mono.targets src/.nuget/NuGet.targets
+  - chmod +x lib/xunit/xunit.console.clr4.x86.exe
+  - export EnableNuGetPackageRestore=true
+
 script:
-  - xbuild Artemis_Mono/Artemis_Mono.sln
-  - nunit-console Artemis_Mono/bin/Debug/ArtemisMonoUnitTests.dll
+  - cd src/
+  - xbuild CI\ Demo.sln
+  - mono ../lib/xunit/xunit.console.clr4.x86.exe CI.Demo.Tests/bin/Debug/CI.Demo.Tests.dll
