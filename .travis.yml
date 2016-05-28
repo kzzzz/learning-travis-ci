@@ -6,5 +6,4 @@ before_install:
   - mozroots --import --sync
 
 script:
-  - cd src/
   - xbuild LearningTravisCi.sln
