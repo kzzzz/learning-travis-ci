@@ -1,9 +1,8 @@
 language: csharp
 solution: LearningTravisCi.sln
 
-before_install:
-  - sudo apt-get install nunit-console
-before_script:
-  - nuget restore LearningTravisCi.sln
-after_script:
-  - nunit-console Tests/bin/Debug/Tests.dll
+install:
+  - sudo apt-get install mono-devel mono-gmcs nunit-console
+script:
+  - xbuild Artemis_Mono/Artemis_Mono.sln
+  - nunit-console Artemis_Mono/bin/Debug/ArtemisMonoUnitTests.dll
