@@ -6,12 +6,7 @@ namespace LearningTravisCi
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Add(1, 2));
-        }
-
-        static int Add(int x, int y)
-        {
-            return x + y;
+            Console.WriteLine(Math.Add(1, 2));
         }
     }
 }
